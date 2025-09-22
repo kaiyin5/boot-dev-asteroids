@@ -1,6 +1,9 @@
 import pygame
+import sys
 from constants import *
 from player import Player
+from asteroid import Asteroid
+from asteroidfield import AsteroidField
 
 def main():
     # console logging
@@ -17,12 +20,16 @@ def main():
     # grouping
     updatable = pygame.sprite.Group()
     drawable = pygame.sprite.Group()
+    asteroids = pygame.sprite.Group()
     Player.containers = (updatable, drawable)
+    Asteroid.containers = (asteroids, updatable, drawable)
+    AsteroidField.containers = updatable
 
-    # player instantiation
+    # objects instantiation
     x = SCREEN_WIDTH / 2
     y = SCREEN_HEIGHT / 2
     player = Player(x, y)
+    asteroid_field = AsteroidField()
 
     while True:
         # check if the user has closed the window and exit the game loop
@@ -34,6 +41,10 @@ def main():
         updatable.update(dt)
         for d in drawable:
             d.draw(screen)
+        for a in asteroids:
+            if a.collides_with(player):
+                print("Game over!")
+                sys.exit(0)
         pygame.display.flip()
         dt = clock.tick(60) / 1000
 

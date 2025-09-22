@@ -1,0 +1,25 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual envs (if any)
+.venv/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor settings (optional)
+.vscode/
+.idea/
+
+# Build/dist
+build/
+dist/
+*.egg-info/
+
+# Logs
+*.log
